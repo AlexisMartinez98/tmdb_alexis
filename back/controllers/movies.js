@@ -11,7 +11,7 @@ exports.getMovies = (req, res) => {
     )
     .then((response) => {
       // Configurar los encabezados CORS
-      res.set("Access-Control-Allow-Origin", "http://localhost:5173");
+      res.set("Access-Control-Allow-Origin", "http://localhost:3000");
       res.set("Access-Control-Allow-Methods", "GET");
       res.set("Access-Control-Allow-Headers", "Content-Type");
 
