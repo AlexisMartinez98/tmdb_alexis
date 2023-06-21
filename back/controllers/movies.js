@@ -10,11 +10,6 @@ exports.getMovies = (req, res) => {
       `${url}/discover/movie/?api_key=${apiKey}&language=es-ES-US&sort_by=popularity.desc&page=1`
     )
     .then((response) => {
-      // Configurar los encabezados CORS
-      res.set("Access-Control-Allow-Origin", "http://localhost:3000");
-      res.set("Access-Control-Allow-Methods", "GET");
-      res.set("Access-Control-Allow-Headers", "Content-Type");
-
       res.status(200).send(response.data.results);
     })
     .catch((error) => res.status(501).send(error));
@@ -23,7 +18,7 @@ exports.getMoviesId = (req, res) => {
   const { id } = req.params;
 
   axios
-    .get(`${url}/movie/${id}?api_key=${apiKey}&language=es-ES`, {})
+    .get(`${url}/movie/${id}?&language=es-ES&api_key=${apiKey}`, {})
     .then((movie) => res.status(200).send(movie.data))
     .catch((error) => res.status(501).send(error));
 };

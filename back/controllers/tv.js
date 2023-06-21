@@ -10,11 +10,6 @@ exports.getTv = (req, res) => {
       `${url}/discover/tv/?api_key=${apiKey}&language=es-ES-US&sort_by=popularity.desc&page=1`
     )
     .then((response) => {
-      // Configurar los encabezados CORS
-      res.set("Access-Control-Allow-Origin", "http://localhost:3000");
-      res.set("Access-Control-Allow-Methods", "GET");
-      res.set("Access-Control-Allow-Headers", "Content-Type");
-
       res.status(200).send(response.data.results);
     })
     .catch((error) => res.status(501).send(error));

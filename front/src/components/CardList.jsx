@@ -1,10 +1,7 @@
 import React from "react";
-import { useLocation, useParams, Link } from "react-router-dom";
 import Card from "./Card";
 
 const CardList = ({ props }) => {
-  // console.log("props", props);
-  // console.log("alexis", props[1]?.original_title);
   if (props[1]?.original_title === undefined) {
     return props.map(
       ({

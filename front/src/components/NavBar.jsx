@@ -19,13 +19,13 @@ const NavBar = () => {
       <div className="w-full flex-grow lg:flex lg:items-center lg:w-auto">
         <div className="text-sm lg:flex-grow">
           <Link
-            to="/categoria/movies"
+            to="/category/movies"
             className="block text-xl mt-4 lg:inline-block lg:mt-0 font-bold text-white hover:text-[#01b4e4] mr-4 active:underline"
           >
             Peliculas
           </Link>
           <Link
-            to="/categoria/tv"
+            to="/category/tv"
             className="block text-xl mt-4 lg:inline-block lg:mt-0 font-bold text-white hover:text-[#01b4e4] mr-4 active:underline"
           >
             Tv-Show
@@ -45,18 +45,18 @@ const NavBar = () => {
         </div>
       </div>
       <div className="flex items-center">
-        <a
-          href="/usuario/login"
+        <Link
+          to="/user/login"
           className="block text-l mt-4 lg:inline-block lg:mt-0 font-bold text-white hover:text-[#01b4e4] mr-4 active:underline px-4 py-2 border-transparent rounded-md transition-colors hover:border-[#01b4e4] border-2"
         >
           Iniciar Sesión
-        </a>
-        <a
-          href="/usuario/register"
+        </Link>
+        <Link
+          to="/user/register"
           className="block text-l mt-4 lg:inline-block lg:mt-0 font-bold text-white hover:text-[#01b4e4] mr-4 active:underline px-4 py-2 border-transparent rounded-md transition-colors hover:border-[#01b4e4] border-2"
         >
           Registrarse
-        </a>
+        </Link>
       </div>
     </nav>
   );

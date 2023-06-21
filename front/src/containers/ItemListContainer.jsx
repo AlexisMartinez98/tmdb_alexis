@@ -1,14 +1,10 @@
 import React from "react";
 import { useLocation, useParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import CardList from "../components/CardList";
-import axios from "axios";
 
 const ItemListContainer = (props) => {
   const URL = useLocation().pathname.split("/")[2];
-  // console.log("URL", URL);
   const { type } = useParams();
-  // console.log(type);
 
   return (
     <div>
