@@ -5,9 +5,10 @@ const apiKey = "dc4f983a963d247f65fde61d73e450ce";
 
 // todas las tv
 exports.getTv = (req, res) => {
+  const { page } = req.query;
   axios
     .get(
-      `${url}/discover/tv/?api_key=${apiKey}&language=es-ES-US&sort_by=popularity.desc&page=1`
+      `${url}/discover/tv/?api_key=${apiKey}&language=es-ES-US&sort_by=popularity.desc&page=${page}`
     )
     .then((response) => {
       res.status(200).send(response.data.results);

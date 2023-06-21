@@ -19,20 +19,25 @@ const FormLogin = () => {
     try {
       const response = await axios.post(
         "http://localhost:3001/user/login",
-        data
+        data,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+          credentials: "include",
+        }
       );
       const token = Cookies.get("token");
       console.log(response.headers);
       console.log(token);
-
       if (token) {
-        Cookies.set("token", token); // Establecer la cookie en el cliente
+        Cookies.set("token", token);
         navigate("/category/movies");
       }
 
       console.log("Respuesta:", response.data);
     } catch (error) {
       console.error("Error:", error.response.data);
+      // Mostrar mensaje de error al usuario
     }
 
     setEmail("");

@@ -12,22 +12,23 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 function App() {
   const [movies, setMovies] = useState([]);
   const [tv, setTv] = useState([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/movies")
+      .get("http://localhost:3001/movies", { params: { page } })
       .then((res) => {
         setMovies(res.data);
       })
       .catch((err) => console.log(err));
 
     axios
-      .get("http://localhost:3001/tv")
+      .get("http://localhost:3001/tv", { params: { page } })
       .then((res) => {
         setTv(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [page]);
 
   return (
     <div>
@@ -35,7 +36,14 @@ function App() {
       <Routes>
         <Route
           path="category/:type"
-          element={<ItemListContainer movies={movies} tv={tv} />}
+          element={
+            <ItemListContainer
+              movies={movies}
+              tv={tv}
+              page={page}
+              setPage={setPage}
+            />
+          }
         />
         <Route path="user/register" element={<FormRegister />} />
         <Route path="user/login" element={<FormLogin />} />
