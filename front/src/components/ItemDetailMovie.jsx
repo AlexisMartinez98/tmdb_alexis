@@ -1,7 +1,6 @@
 import React from "react";
 
 const ItemDetailMovie = ({ data }) => {
-  console.log(data);
   const { original_title, overview, poster_path, release_date, title } = data;
   const baseUrl = "https://image.tmdb.org/t/p/original";
   return (

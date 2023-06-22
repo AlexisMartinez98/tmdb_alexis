@@ -1,7 +1,7 @@
 const express = require("express");
 const userLoginRoutes = express.Router();
 const User = require("../models/user");
-const { generateToken } = require("../config/tokens");
+const { generateToken, validateToken } = require("../config/tokens");
 
 userLoginRoutes.post("/login", (req, res) => {
   const { email, password } = req.body;
@@ -25,6 +25,20 @@ userLoginRoutes.post("/login", (req, res) => {
       }
     });
   });
+});
+
+userLoginRoutes.get("/me", (req, res) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.status(418).send("no hay user");
+  }
+  const { payload } = validateToken(token);
+  res.send(payload);
+});
+
+userLoginRoutes.post("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.sendStatus(204);
 });
 
 module.exports = userLoginRoutes;

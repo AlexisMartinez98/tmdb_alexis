@@ -2,3 +2,24 @@
 // const apiKey = "dc4f983a963d247f65fde61d73e450ce";
 
 // https://api.themoviedb.org/3/movie/385687?language=es-ES&api_key=dc4f983a963d247f65fde61d73e450ce
+
+function searchMovies(query) {
+  const apiKey = "TU_API_KEY"; // Reemplaza 'TU_API_KEY' por tu clave de API de TMDB
+  const url = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${query}`;
+
+  // Realizar solicitud GET a la API de TMDB
+  $.get(url, function (data) {
+    const results = data.results;
+
+    // Limpiar los resultados anteriores
+    $("#results").empty();
+
+    // Mostrar los resultados en una lista
+    results.forEach(function (result) {
+      const title = result.title || result.name;
+      const type = result.media_type === "movie" ? "Película" : "TV Show";
+      const li = `<li>${title} (${type})</li>`;
+      $("#results").append(li);
+    });
+  });
+}

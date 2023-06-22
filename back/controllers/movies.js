@@ -17,7 +17,6 @@ exports.getMovies = (req, res) => {
 };
 exports.getMoviesId = (req, res) => {
   const { id } = req.params;
-
   axios
     .get(`${url}/movie/${id}?&language=es-ES&api_key=${apiKey}`, {})
     .then((movie) => res.status(200).send(movie.data))

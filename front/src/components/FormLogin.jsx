@@ -27,8 +27,8 @@ const FormLogin = () => {
         }
       );
       const token = Cookies.get("token");
-      console.log(response.headers);
-      console.log(token);
+      // console.log(response.headers);
+      // console.log(token);
       if (token) {
         Cookies.set("token", token);
         navigate("/category/movies");

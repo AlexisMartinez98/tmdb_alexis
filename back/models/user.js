@@ -48,8 +48,6 @@ User.init(
     salt: {
       type: Sequelize.STRING,
     },
-    favorites: Sequelize.INTEGER,
-    tmdbId: Sequelize.INTEGER,
   },
   { sequelize: db, modelName: "users" }
 );
