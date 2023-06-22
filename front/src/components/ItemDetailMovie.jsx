@@ -3,8 +3,13 @@ import React from "react";
 const ItemDetailMovie = ({ data }) => {
   const { original_title, overview, poster_path, release_date, title } = data;
   const baseUrl = "https://image.tmdb.org/t/p/original";
+
+  const handleAddToFavorites = () => {
+    console.log("Agregado a favoritos");
+  };
+
   return (
-    <div className="flex items-center justify-center rounded overflow-hidden shadow-lg mb-5 h-screen">
+    <div className="flex items-center justify-center rounded overflow-hidden shadow-lg mb-5 h-[790px]">
       <div className="border-r border-gray-200">
         <img
           className="w-auto h-auto"
@@ -25,9 +30,12 @@ const ItemDetailMovie = ({ data }) => {
             {release_date}
           </h3>
         </div>
-        {/* <div className='mt-7'>
-                    <Count item={data} onAdd={onAdd}/>
-                </div> */}
+        <button
+          className="bg-[#010024] hover:bg-[#01b4e4] text-white font-bold py-2 px-4 rounded mt-5"
+          onClick={handleAddToFavorites}
+        >
+          Agregar a favoritos
+        </button>
       </div>
     </div>
   );

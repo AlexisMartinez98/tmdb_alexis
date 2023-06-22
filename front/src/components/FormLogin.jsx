@@ -31,8 +31,8 @@ const FormLogin = () => {
       // console.log(token);
       if (token) {
         Cookies.set("token", token);
-        navigate("/category/movies");
       }
+      navigate("/category/movies");
 
       console.log("Respuesta:", response.data);
     } catch (error) {
@@ -45,7 +45,7 @@ const FormLogin = () => {
   };
 
   return (
-    <div>
+    <div className="h-[740px]">
       <h1 className="text-2xl font-bold m-16">
         Complete el formulario para iniciar sesion
       </h1>

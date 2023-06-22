@@ -26,6 +26,7 @@ const NavBar = ({ userData, setUserData, search, setSearch }) => {
   const handleBuscador = (e) => {
     setBuscador(e.target.value);
   };
+  useEffect;
 
   useEffect(() => {
     axios

@@ -22,7 +22,7 @@ function App() {
     axios
       .get("http://localhost:3001/user/me", { withCredentials: true })
       .then((res) => {
-        console.log("consulta si hay user", res.data);
+        // console.log("consulta si hay user", res.data);
         setUserData(res.data); // Guardar la respuesta del backend en el estado userData
       });
   }, []);
@@ -71,7 +71,7 @@ function App() {
         />
         <Route
           path="user/:username"
-          element={<User userData={userData} setUserData={setUserData} />}
+          element={userData ? <User userData={userData} /> : <FormLogin />}
         />
         <Route path="/search" element={<ItemListSearch search={search} />} />
       </Routes>

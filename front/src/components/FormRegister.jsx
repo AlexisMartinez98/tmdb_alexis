@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const FormRegister = () => {
   const [username, setUsername] = useState("");
@@ -6,19 +8,26 @@ const FormRegister = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+
   // aca peticion
   const enviarDatos = (e) => {
     e.preventDefault();
     console.log("enviando datos..." + username + email + password);
     const data = { username, email, password };
-    fetch("http://localhost:3001/user/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+
+    axios
+      .post("http://localhost:3001/user/register", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        navigate("/user/login");
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
       });
 
     setUsername("");
@@ -43,7 +52,7 @@ const FormRegister = () => {
   };
 
   return (
-    <div>
+    <div className="h-[740px]">
       <h1 className="text-2xl font-bold m-16">
         Complete el formulario para Registrarse
       </h1>

@@ -7,12 +7,14 @@ Favorites.init(
   {
     userId: {
       type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
       allowNull: false,
     },
     category: {
       type: Sequelize.STRING,
     },
-    id: {
+    idSelection: {
       type: Sequelize.INTEGER,
     },
   },
