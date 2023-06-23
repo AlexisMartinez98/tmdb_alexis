@@ -3,6 +3,8 @@
 
 - TMDB ALEXIS 🎬🎬
 
+- ![TMDB-ALEXIS](https://the-movie-database-dun.vercel.app/static/media/blue_square_1-5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.bb8aa703cb92c9aa31fc1e0b17850ed9.svg)  
+
 ## Información para el cliente:
 
 > Somos **TMDB-ALEXIS**, Web de peliculas y TvShow.
