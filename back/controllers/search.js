@@ -5,7 +5,6 @@ const url = `https://api.themoviedb.org/3`;
 
 exports.getSearch = (req, res) => {
   const { query } = req.query;
-
   axios
     .get(`${url}/search/movie?api_key=${apiKey}&language=es-ES&query=${query}`)
     .then((response) => {

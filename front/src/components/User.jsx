@@ -63,7 +63,7 @@ const User = () => {
 
   const baseUrl = "https://image.tmdb.org/t/p/original";
   return (
-    <div className="w-[100%] h-[810px] px-52 pt-10">
+    <div className="flex justify-center items-center flex-col px-52 pt-10">
       <div
         className="relative mt-1 flex h-32 w-full justify-center rounded-xl bg-cover"
         style={{
@@ -92,12 +92,12 @@ const User = () => {
           <p className="text-sm font-normal text-gray-600">
             Cantidad: <span>{favorites.length}</span>
           </p>
-          <div className="flex">
+          <div className="grid grid-cols-5 h-[1000px]">
             {favoritesData.map((favorite) => (
               <Link
                 to={`/category/movies/${favorite.id}`}
                 key={favorite.id}
-                className="transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none w-[200px] h-[250px] m-2"
+                className=" w-[200px] h-[250px] mt-3 mx-3"
               >
                 <div className="max-w-xs">
                   <img

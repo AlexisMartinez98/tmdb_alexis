@@ -25,6 +25,7 @@ const CardSearch = ({
               <span className="text-[#00a650] font-light text-sm">
                 Fecha de estreno:
               </span>
+              {""}
               {`${release_date}`}
             </p>
             <p className="font-light">{vote_average}</p>
