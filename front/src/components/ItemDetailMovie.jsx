@@ -13,6 +13,9 @@ const ItemDetailMovie = ({ data }) => {
   const baseUrl = "https://image.tmdb.org/t/p/original";
 
   const handleAddToFavorites = () => {
+    if (userData.user === null) {
+      toast.error("Inicie sesion para agregar a favoritos");
+    }
     const data = {
       username: userData.user.username,
       category: "movies",
