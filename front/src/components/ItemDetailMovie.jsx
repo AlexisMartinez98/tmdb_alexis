@@ -1,6 +1,11 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const ItemDetailMovie = ({ data }) => {
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user);
+  console.log(userData);
+
   const { original_title, overview, poster_path, release_date, title } = data;
   const baseUrl = "https://image.tmdb.org/t/p/original";
 

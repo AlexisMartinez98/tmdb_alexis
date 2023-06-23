@@ -2,6 +2,8 @@ import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "./store/actions";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import ItemListContainer from "./containers/ItemListContainer";
@@ -12,18 +14,18 @@ import User from "./components/User";
 import ItemListSearch from "./containers/ItemListSearch";
 
 function App() {
-  const [userData, setUserData] = useState(null);
   const [movies, setMovies] = useState([]);
   const [tv, setTv] = useState([]);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState([]);
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user);
 
   useEffect(() => {
     axios
       .get("http://localhost:3001/user/me", { withCredentials: true })
       .then((res) => {
-        // console.log("consulta si hay user", res.data);
-        setUserData(res.data); // Guardar la respuesta del backend en el estado userData
+        dispatch(setUser(res.data));
       });
   }, []);
 
@@ -45,12 +47,7 @@ function App() {
 
   return (
     <div>
-      <NavBar
-        userData={userData}
-        setUserData={setUserData}
-        search={search}
-        setSearch={setSearch}
-      />
+      <NavBar search={search} setSearch={setSearch} />
       <Routes>
         <Route
           path="category/:type"
@@ -69,10 +66,7 @@ function App() {
           path="category/:type/:itemId"
           element={<ItemDetailContainer />}
         />
-        <Route
-          path="user/:username"
-          element={userData ? <User userData={userData} /> : <FormLogin />}
-        />
+        <Route path="user/:username" element={<User />} />
         <Route path="/search" element={<ItemListSearch search={search} />} />
       </Routes>
 

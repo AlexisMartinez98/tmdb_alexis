@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { userRegister } from "../store/user";
 
 const FormRegister = () => {
   const [username, setUsername] = useState("");
@@ -9,30 +10,13 @@ const FormRegister = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // aca peticion
   const enviarDatos = (e) => {
     e.preventDefault();
-    console.log("enviando datos..." + username + email + password);
-    const data = { username, email, password };
-
-    axios
-      .post("http://localhost:3001/user/register", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        navigate("/user/login");
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    setUsername("");
-    setEmail("");
-    setPassword("");
+    dispatch(userRegister({ username, email, password }));
+    navigate("/user/login");
   };
 
   const msjPassword = () => {

@@ -40,6 +40,7 @@ userLoginRoutes.get("/me", (req, res) => {
     return res.status(418).send("no hay user");
   }
   const { payload } = validateToken(token);
+  console.log("payload", payload);
   res.send(payload);
 });
 

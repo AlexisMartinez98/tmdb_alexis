@@ -5,17 +5,13 @@ class Favorites extends Sequelize.Model {}
 
 Favorites.init(
   {
-    userId: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false,
-    },
     category: {
       type: Sequelize.STRING,
+      allowNull: false,
     },
-    idSelection: {
+    dbId: {
       type: Sequelize.INTEGER,
+      allowNull: false,
     },
   },
   { sequelize: db, modelName: "favorites" }

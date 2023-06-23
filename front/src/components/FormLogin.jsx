@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../store/user";
+import { setUser } from "../store/actions";
 
 const FormLogin = () => {
   const [email, setEmail] = useState("");
@@ -10,38 +11,18 @@ const FormLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const enviarDatos = async (e) => {
     e.preventDefault();
-    console.log("enviando datos..." + email + password);
-    const data = { email, password };
-
     try {
-      const response = await axios.post(
-        "http://localhost:3001/user/login",
-        data,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-          credentials: "include",
-        }
-      );
-      const token = Cookies.get("token");
-      // console.log(response.headers);
-      // console.log(token);
-      if (token) {
-        Cookies.set("token", token);
-      }
+      const response = await dispatch(userLogin({ email, password }));
+      const userData = response.payload;
+      dispatch(setUser(userData));
       navigate("/category/movies");
-
-      console.log("Respuesta:", response.data);
     } catch (error) {
-      console.error("Error:", error.response.data);
-      // Mostrar mensaje de error al usuario
+      console.error("Error:", error);
     }
-
-    setEmail("");
-    setPassword("");
   };
 
   return (

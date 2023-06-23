@@ -1,4 +1,8 @@
-import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createReducer,
+  createAction,
+} from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -41,15 +45,25 @@ export const userLogout = createAsyncThunk("USER_LOGOUT", () => {
     .post("http://localhost:3001/user/logout", null, { withCredentials: true })
     .then(() => {
       Cookies.remove("token");
-      navigate("/category/movies");
     })
     .catch((error) => console.log(error));
 });
 
-const userReducer = createReducer([], {
+const initialState = {
+  user: null,
+};
+
+export const setUser = createAction("SET_USER");
+export const clearUser = createAction("CLEAR_USER");
+
+const userReducer = createReducer(initialState, {
   [userRegister.fulfilled]: (state, action) => action.payload,
-  [userLogin.fulfilled]: (state, action) => action.payload,
-  [userLogout.fulfilled]: (state, action) => action.payload,
+  [userLogin.fulfilled]: (state, action) => {
+    state.user = action.payload;
+  },
+  [userLogout.fulfilled]: (state, action) => {
+    state.user = null;
+  },
 });
 
 export default userReducer;
