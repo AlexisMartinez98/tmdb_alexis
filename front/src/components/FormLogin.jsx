@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../store/user";
 import { setUser } from "../store/actions";
+import { Toaster, toast } from "react-hot-toast";
 
 const FormLogin = () => {
   const [email, setEmail] = useState("");
@@ -20,6 +21,7 @@ const FormLogin = () => {
       const userData = response.payload;
       dispatch(setUser(userData));
       navigate("/category/movies");
+      toast.success(`Bienvenido ${userData.username}`);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -67,6 +69,7 @@ const FormLogin = () => {
           Iniciar Sesion
         </button>
       </form>
+      <Toaster />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userRegister } from "../store/user";
+import { Toaster, toast } from "react-hot-toast";
 
 const FormRegister = () => {
   const [username, setUsername] = useState("");
@@ -17,6 +18,7 @@ const FormRegister = () => {
     e.preventDefault();
     dispatch(userRegister({ username, email, password }));
     navigate("/user/login");
+    toast.success("Usuario creado con exito");
   };
 
   const msjPassword = () => {
@@ -88,6 +90,7 @@ const FormRegister = () => {
           Registrarse
         </button>
       </form>
+      <Toaster />
     </div>
   );
 };

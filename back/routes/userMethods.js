@@ -59,4 +59,37 @@ userMethods.post("/:username/add", (req, res) => {
     });
 });
 
+userMethods.delete("/:username/delete", (req, res) => {
+  const { category, dbId } = req.body;
+  const { username } = req.params;
+
+  User.findOne({ where: { username } })
+    .then((user) => {
+      if (user) {
+        return Favorites.destroy({
+          where: {
+            dbId: dbId,
+            category: category,
+            userId: user.id,
+          },
+        });
+      } else {
+        throw new Error("Usuario no encontrado");
+      }
+    })
+    .then((deleted) => {
+      if (deleted) {
+        res
+          .status(200)
+          .send("Se ha eliminado con éxito de tu lista de favoritos.");
+      } else {
+        res.status(404).send("El elemento no está en tu lista de favoritos.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error al eliminar de favoritos:", error);
+      res.status(500).json({ error: "Error interno del servidor" });
+    });
+});
+
 module.exports = userMethods;

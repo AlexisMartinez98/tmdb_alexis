@@ -2,11 +2,11 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite } from "../store/stateFavorite";
+import { Toaster, toast } from "react-hot-toast";
 
 const ItemDetailMovie = ({ data }) => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
-  console.log(userData.user.username);
   const dbId = useLocation().pathname.split("/")[3];
 
   const { original_title, overview, poster_path, release_date, title } = data;
@@ -19,6 +19,10 @@ const ItemDetailMovie = ({ data }) => {
       id: dbId,
     };
     dispatch(addFavorite(data));
+    toast.success("Agregado a favoritos", {
+      duration: 1000,
+      position: "top-center",
+    });
   };
 
   return (
@@ -50,6 +54,7 @@ const ItemDetailMovie = ({ data }) => {
           Agregar a favoritos
         </button>
       </div>
+      <Toaster />
     </div>
   );
 };

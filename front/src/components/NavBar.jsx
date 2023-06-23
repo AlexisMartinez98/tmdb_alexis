@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../store/user";
 import { clearUser } from "../store/actions";
 import axios from "axios";
+import { Toaster, toast } from "react-hot-toast";
 
 const NavBar = ({ search, setSearch }) => {
   const [buscador, setBuscador] = useState("");
@@ -17,6 +18,7 @@ const NavBar = ({ search, setSearch }) => {
     dispatch(userLogout());
     dispatch(clearUser());
     navigate("/category/movies");
+    toast.success("Sesión cerrada");
   };
 
   const handleBuscador = (e) => {
@@ -93,7 +95,7 @@ const NavBar = ({ search, setSearch }) => {
             {/* {userData && userData.user && ( */}
             <Link
               to={`/user/${userData.user.username}`}
-              className="block text-l mt-4 lg:inline-block lg:mt-0 font-bold text-white hover:text-[#01b4e4] mr-4 active:underline px-4 py-2 border-transparent rounded-md transition-colors hover:border-[#01b4e4] border-2"
+              className="block text-l mt-4 lg:inline-block lg:mt-0 font-bold text-white hover:text-[#01b4e4] mr-4 active:underline px-4 py-2 border-transparent rounded-md transition-colors hover:border-[#01b4e4] border-2 uppercase"
             >
               {userData.user.username}
             </Link>
@@ -107,6 +109,7 @@ const NavBar = ({ search, setSearch }) => {
           </>
         )}
       </div>
+      <Toaster />
     </nav>
   );
 };
