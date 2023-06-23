@@ -38,7 +38,7 @@ const NavBar = ({ search, setSearch }) => {
     <nav className="flex items-center justify-between flex-wrap bg-[#010024]">
       <div className="flex items-center flex-shrink-0 text-white ml-5 my-5">
         <Link
-          to="/"
+          to="/category/movies"
           className="block text-xl mt-4 lg:inline-block lg:mt-0 font-bold text-white hover:text-red-600 mr-4 active:underline"
         >
           <img

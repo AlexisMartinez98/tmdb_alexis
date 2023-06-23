@@ -1,7 +1,7 @@
 import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./store/actions";
 import NavBar from "./components/NavBar";
@@ -20,6 +20,7 @@ function App() {
   const [search, setSearch] = useState([]);
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
+  const Navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -45,6 +46,10 @@ function App() {
       .catch((err) => console.log(err));
   }, [page]);
 
+  useEffect(() => {
+    Navigate("/category/movies");
+  }, []);
+
   return (
     <div>
       <NavBar search={search} setSearch={setSearch} />
@@ -69,7 +74,6 @@ function App() {
         <Route path="user/:username" element={<User />} />
         <Route path="/search" element={<ItemListSearch search={search} />} />
       </Routes>
-
       <Footer />
     </div>
   );
