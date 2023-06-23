@@ -16,17 +16,7 @@ const ItemDetailContainer = () => {
       });
   }, [itemId]);
   return (
-    <div
-      className="bg-cover bg-center"
-      // style={{
-      //   backgroundImage: `url(https://image.tmdb.org/t/p/original${item.backdrop_path})`,
-      // }}
-    >
-      {/* {item.id ? (<ItemDetailMovie data={item} />) : (
-        <div className="flex items-center justify-center h-screen">
-          <GridLoader color="#36d7b7" />
-        </div>
-      )} */}
+    <div className="bg-cover bg-center">
       {item.id ? (
         URL === "movies" ? (
           <ItemDetailMovie data={item} />

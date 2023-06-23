@@ -1,9 +1,48 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { allFavorites } from "../store/userFavorites";
+import { Link } from "react-router-dom";
 
 const User = () => {
+  const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
   const { username, email } = userData?.user || {};
+  const [favorites, setFavorites] = useState([]);
+  const [favoritesData, setFavoritesData] = useState([]);
+
+  useEffect(() => {
+    if (username) {
+      dispatch(allFavorites(username))
+        .then((data) => setFavorites(data.payload))
+        .catch((error) => console.log(error));
+    }
+  }, [, dispatch, username]);
+  useEffect(() => {
+    const fetchFavoritesData = async () => {
+      try {
+        const requests = favorites.map((favorite) => {
+          const { category, dbId } = favorite;
+          return axios.get(`http://localhost:3001/${category}/${dbId}`);
+        });
+
+        const responses = await Promise.all(requests);
+        const responseData = responses.map((response) => response.data);
+
+        setFavoritesData(responseData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (favorites.length > 0) {
+      fetchFavoritesData();
+    }
+  }, [favorites]);
+
+  console.log(favoritesData);
+  const baseUrl = "https://image.tmdb.org/t/p/original";
   return (
     <div className="w-[100%] h-[800px] px-52 pt-10">
       <div
@@ -36,6 +75,35 @@ const User = () => {
             Favoritos
           </h4>
           <p className="text-sm font-normal text-gray-600">1</p>
+          <div>
+            {favoritesData.map((favorite) => (
+              <Link
+                to={`/movies/${favorite.id}`}
+                key={favorite.id}
+                className="max-w-xs rounded-xl overflow-hidden shadow-lg transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              >
+                <div className="max-w-xs rounded-xl overflow-hidden shadow-lg transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none">
+                  <img
+                    className="img-producto w-full"
+                    src={`${baseUrl}${favorite.poster_path}`}
+                    alt={`${baseUrl}${favorite.original_title}`}
+                  />
+                  <div className="px-6 py-4 border-t border-gray-200">
+                    <div className="mb-2 text-center">{favorite.title}</div>
+                    <div className="flex justify-around mt-4">
+                      <p className="text-gray-700 text-base font-bold text-center">
+                        <span className="text-[#00a650] font-light text-sm">
+                          Fecha de estreno:
+                        </span>{" "}
+                        {`${favorite.release_date}`}
+                      </p>
+                      <p className="font-light">{favorite.vote_average}</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>
